@@ -10,6 +10,8 @@ printf "${STOP}"
 
 echo ""
 
+apt-get install python3
+pkg install python3
 mkdir accounts
 
 
