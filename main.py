@@ -7,6 +7,7 @@ from resources.text_color import *
 
 # Global Variables
 holder = 0 # Used to stop printing Unknown input later
+
 """
 def write_key():
 	key = Fernet.generate_key()
@@ -181,7 +182,7 @@ def seeContent():
 Or Enter site/app to view password!!
 """)
 
-	answer = input("> " + bcolors.ENDC)
+	answer = input("> ")
 	answer = answer.title()
 
 	# checks if the input is site or app
@@ -197,12 +198,12 @@ Or Enter site/app to view password!!
 		holder = 1
 
 		# options
-		print ("""[1] Go back
+		print ("""[0] Go back
 [Q/q] Quit
 """)
 		answer = input(bcolors.OKGREEN + "> ")
 		answer = answer.upper()
-		if answer == "1":
+		if answer == "0":
 			os.chdir("..")
 			listOptions()
 		elif anwer == "Q":
@@ -223,22 +224,71 @@ Or Enter site/app to view password!!
 		time.sleep(1)
 		sys.exit(0)
 	else:
-		if holder == 0:
-			print (bcolors.WARNING + "Unknown Input!!" + bcolors.ENDC)
-			time.sleep(1)
-		seeContent()
-
+		try:
+			if holder == 0:
+				print (bcolors.WARNING + "Unknown Input!!" + bcolors.ENDC)
+				time.sleep(1)
+				seeContent()
+		except UnboundLocalError:
+				print (bcolors.WARNING + "Unknown Input!!" + bcolors.ENDC)
+				time.sleep(1)
+				seeContent()
 # remove content and password
 def rmContent():
-	pass
+	os.system("clear")
+	banner()
+	files = os.listdir()
+	noFiles = len(files)
+	folder = []
 
+	for i in range(0, noFiles):
+		item = files[i]
+		if "." in item:
+			pass
+		else:
+			folder.append(item)
+			del item
+
+	for i in folder:
+		print (bcolors.OKGREEN + i)
+
+	print ("\n" + """[0] Go back
+[Q/q] Quit
+Which password you want to delete? (Enter name)""" + "\n")
+	name = input("> ")
+	name = name.upper()
+	# looks the input
+	if name == "0":
+		listOptions()
+	elif name == "Q":
+		print (bcolors.WARNING + "Quitting!!" + bcolors.ENDC)
+		time.sleep(1)
+		sys.exit(0)
+
+	name = name.title()
+
+	# Delet the file
+	try:
+		name = name.title()
+		os.chdir(f"{name}")
+		os.remove(f"{name}")
+		os.chdir("..")
+		os.rmdir(f"{name}")
+
+		print (f"Succesfully deleated {name}!")
+		time.wait(1)
+		listOptions()
+	except FileNotFoundError:
+		print (bcolors.WARNING + "Wrong input" + bcolors.ENDC)
+		time.sleep(1)
+		rmContent()
 # Save apps/site
 def saveContent():
 	os.system("clear")
 	banner()
 
 	print (bcolors.OKGREEN + ("Enter app/site name: "))
-	site = input("> ")
+	site = input(bcolors.OKGREEN + "> ")
 	site = site.title()
 
 	# creat a folder with the name
