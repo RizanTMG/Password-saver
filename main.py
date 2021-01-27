@@ -26,7 +26,7 @@ def banner():
 | '_ \___ \ / _` \ \ / / _ \ '__|
 | |_) |__) | (_| |\ V /  __/ |
 | .__/____/ \__,_| \_/ \___|_|
-|_|				v0.1
+|_|				v0.2
 	""" + bcolors.ENDC)
 
 # If the user does not have a account
