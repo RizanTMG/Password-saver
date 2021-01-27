@@ -19,3 +19,7 @@ How to install:
 
 Prerequisite:
 You need to have python installed on your terminal (device).
+
+Verson 0.2:
+* Ability to remove saved password!
+* Some bug fixes!
